@@ -1,0 +1,61 @@
+query ListAllPlants @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  plants {
+    id
+    name
+    species
+    createdAt
+    user {
+      username
+    }
+  }
+}
+
+mutation CreatePost($content: String!, $type: String!, $title: String, $imageUrl: String, $plantId: UUID) @auth(level: USER) {
+  post_insert(data: {
+    content: $content,
+    type: $type,
+    title: $title,
+    imageUrl: $imageUrl,
+    userId_expr: "auth.uid",
+    plantId: $plantId
+  }) {
+    id
+  }
+}
+
+mutation LikePost($postId: UUID!) @auth(level: USER) {
+  like_insert(data: {
+    userId_expr: "auth.uid",
+    postId: $postId,
+    createdAt_expr: "request.time"
+  }) {
+    userId
+    postId
+  }
+}
+
+query GetUserPosts($userId: UUID!) @auth(level: USER) {
+  posts(where: {userId: {eq: $userId}}, orderBy: [{createdAt: DESC}]) {
+    id
+    title
+    content
+    createdAt
+    plant {
+      name
+    }
+    user {
+      username
+    }
+    likes_on_post {
+      user {
+        username
+      }
+    }
+    comments_on_post {
+      content
+      user {
+        username
+      }
+    }
+  }
+}

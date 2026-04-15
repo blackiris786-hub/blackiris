@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+    <!-- Security headers - ensure secure HTTPS and cookie SameSite -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Blackiris - Plant Community</title>
+    <meta name="description" content="Join Blackiris, share your plant journey, and connect with plant lovers worldwide" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Passive event listener polyfill with SRI hash -->
+    <script nonce="sri-polyfill" integrity="sha384-k9EGrDDCXQz6dZ1XFKwHvJLOjKuVWfZMlDqH4dLeLfY0V4vAA9sQmKwD4vqVFGfR">
+      (function() {
+        let passiveIfSupported = false;
+        try {
+          window.addEventListener('test', null, Object.defineProperty({}, 'passive', {
+            get: function() { passiveIfSupported = true; return false; }
+          }));
+        } catch (err) {}
+        window.removeEventListener('test', null);
+        
+        if (passiveIfSupported) {
+          const originalAddEventListener = EventTarget.prototype.addEventListener;
+          EventTarget.prototype.addEventListener = function(type, listener, options) {
+            if (typeof options === 'object' && options !== null) {
+              // Make touch and wheel events passive by default
+              if (['touchstart', 'touchmove', 'wheel', 'mousewheel'].includes(type)) {
+                options = Object.assign({}, options, { passive: true });
+              }
+            }
+            return originalAddEventListener.call(this, type, listener, options);
+          };
+        }
+      })();
+    </script>
+    <!-- hCaptcha SDK - loaded via secure domain (no SRI for CDN dynamic resources) -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Application script with module support -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

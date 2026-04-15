@@ -1,0 +1,40 @@
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+.env
+.env.local
+
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary and test files
+tmp_*.json
+test_*.json
+test_*.js
+*.sql
+apply-migrations.js
+node-installer.msi
+
+# Backup and documentation files with sensitive info
+DEBUG_GUIDE.md
+SECRETS_*.md
+
+# OpenMemory - IDE/Assistant specific rules
+.cursor\rules\openmemory.mdc

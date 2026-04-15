@@ -1,0 +1,80 @@
+{
+  "hosting": {
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=63072000; includeSubDomains; preload"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+          },
+          {
+            "key": "X-Permitted-Cross-Domain-Policies",
+            "value": "none"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' https://firebaseapp.com https://firebasedatabase.app https://generativelanguage.googleapis.com https://www.googletagmanager.com https://js.hcaptcha.com https://newassets.hcaptcha.com https://api.hcaptcha.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://js.hcaptcha.com https://newassets.hcaptcha.com https://fonts.googleapis.com; img-src 'self' data: https://firebaseapp.com https://firebasedatabase.app https://bvstxvfikfzdlyzdbpbd.supabase.co https://js.hcaptcha.com https://newassets.hcaptcha.com; font-src 'self' data: https://fonts.gstatic.com https://js.hcaptcha.com https://newassets.hcaptcha.com; connect-src 'self' https://bvstxvfikfzdlyzdbpbd.supabase.co https://black-iris-org.firebaseio.com https://firebaseapp.com https://firebasedatabase.app https://www.googleapis.com https://generativelanguage.googleapis.com https://hcaptcha.com https://api.hcaptcha.com https://newassets.hcaptcha.com https://cdn.jsdelivr.net wss://bvstxvfikfzdlyzdbpbd.supabase.co wss://ns.firebaseio.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-src https://hcaptcha.com https://newassets.hcaptcha.com; upgrade-insecure-requests"
+          }
+        ]
+      },
+      {
+        "source": "/index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=63072000; includeSubDomains; preload"
+          }
+        ]
+      },
+      {
+        "source": "/assets/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=63072000; includeSubDomains; preload"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          }
+        ]
+      }
+    ]
+  }
+}
